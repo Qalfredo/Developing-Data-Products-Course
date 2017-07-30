@@ -1,0 +1,45 @@
+---
+title: "NY_Subway"
+author: "Alfredo Quintana"
+date: "July 30, 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## New York City Subway
+This is a simple presentation about  type of entrances in line 4 in New York city subway.
+We are using the NYC Transit Subway Entrance And Exit Data provided in [https://catalog.data.gov/dataset/nyc-transit-subway-entrance-and-exit-data](The U.S Government Open Data Site)
+
+
+
+## Leaflet Map
+### July 30, 2017
+
+```{r , echo = FALSE,comment=FALSE, message=FALSE}
+
+library(dplyr)
+library(leaflet)
+
+
+NY_subway <- read.csv("NYC_Transit_Subway_Entrance_And_Exit_Data.csv", header = T, sep = ",")
+
+fourth_line <- NY_subway[NY_subway$Line=="4 Avenue", ]
+
+fourth_line <- select(fourth_line, Station.Name, Entrance.Type, Vending, Entrance.Latitude, Entrance.Longitude)
+
+sub_icon <- makeIcon(iconUrl = "https://upload.wikimedia.org/wikipedia/commons/7/7a/MTA_New_York_City_Subway_logo.svg", iconWidth = 100, iconHeight = 50, iconAnchorX = 31*215/230/2, iconAnchorY = 16)
+my_map <- leaflet(fourth_line) %>% addTiles()
+my_map  %>% addMarkers(~Entrance.Longitude, ~Entrance.Latitude, popup = ~ Entrance.Type , icon = sub_icon)
+
+```
+
+
+
+
+
+
+
+
