@@ -1,0 +1,44 @@
+---
+title: "European Stock Indexes"
+author: "Alfredo Quintana"
+date: "July 31, 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## European Stock Indexes
+This is a interactive visualization of the main European Stock Indexes that has been done using plotly lbrary. 
+
+
+## 
+
+### July 31, 2017
+
+```{r , echo = FALSE,comment=FALSE, message=FALSE}
+
+library(plotly)
+
+
+
+
+fecha <- seq(as.Date('1991-01-01'), by = "days", length = 1860)
+
+plot_ly(as.data.frame(EuStockMarkets), x = fecha) %>% 
+  add_trace(y = as.data.frame(EuStockMarkets)$SMI, mode = 'lines', name = "SMI") %>%
+  add_trace(y = as.data.frame(EuStockMarkets)$CAC, mode = 'lines', name = "CAC") %>%
+  add_trace(y = as.data.frame(EuStockMarkets)$DAX, mode = 'lines', name = "DAX") %>%
+  add_trace(y = as.data.frame(EuStockMarkets)$FTSE, mode = 'lines', name = "FTSE") %>%
+  layout(title = "European Stock Indices", xaxis = list(title = "Years"), yaxis = list(title = "Value"))
+
+```
+
+
+
+
+
+
+
+
